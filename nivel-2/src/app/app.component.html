@@ -1,71 +1,55 @@
-<p-table [value]="products" dataKey="id" [tableStyle]="{ 'min-width': '60rem' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
-  <!-- <ng-template pTemplate="caption">
-      <div class="flex flex-wrap justify-content-end gap-2">
-          <p-button label="Expand All" icon="pi pi-plus" text (onClick)="expandAll()" />
-          <p-button label="Collapse All" icon="pi pi-minus" text (onClick)="collapseAll()" />
-      </div>
-  </ng-template> -->
-  <ng-template pTemplate="header">
-      <tr>
-          <th style="width: 5rem"></th>
-          <th pSortableColumn="name">Name <p-sortIcon field="name" /></th>
-          <th>Image</th>
-          <th pSortableColumn="price">Price <p-sortIcon field="price" /></th>
-          <th pSortableColumn="category">Category <p-sortIcon field="category" /></th>
-          <th pSortableColumn="rating">Reviews <p-sortIcon field="rating" /></th>
-          <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus" /></th>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-product let-expanded="expanded">
-      <tr>
-          <td>
-              <p-button type="button" pRipple [pRowToggler]="product" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
-          </td>
-          <td>{{ product.name }}</td>
-          <td><img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + product.image" [alt]="product.name" width="50" class="shadow-4" /></td>
-          <td>{{ product.price | currency : 'USD' }}</td>
-          <td>{{ product.category }}</td>
-          <td><p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false" /></td>
-          <td>
-              <p-tag [value]="product.inventoryStatus"  />
-          </td>
-      </tr>
-  </ng-template>
-  <ng-template pTemplate="rowexpansion" let-product>
-      <tr>
-          <td colspan="7">
-              <div class="p-3">
-                  <p-table [value]="product.orders" dataKey="id">
-                      <ng-template pTemplate="header">
-                          <tr>
-                              <th pSortableColumn="id">Id <p-sortIcon field="price" /></th>
-                              <th pSortableColumn="customer">Customer <p-sortIcon field="customer" /></th>
-                              <th pSortableColumn="date">Date <p-sortIcon field="date" /></th>
-                              <th pSortableColumn="amount">Amount <p-sortIcon field="amount" /></th>
-                              <th pSortableColumn="status">Status <p-sortIcon field="status" /></th>
-                              <th style="width: 4rem"></th>
-                          </tr>
-                      </ng-template>
-                      <ng-template pTemplate="body" let-order>
-                          <tr>
-                              <td>{{ order.id }}</td>
-                              <td>{{ order.customer }}</td>
-                              <td>{{ order.date }}</td>
-                              <td>{{ order.amount | currency : 'USD' }}</td>
-                              <td>
-                                  <p-tag [value]="order.status" />
-                              </td>
-                              <td><p-button type="button" icon="pi pi-search" /></td>
-                          </tr>
-                      </ng-template>
-                      <ng-template pTemplate="emptymessage">
-                          <tr>
-                              <td colspan="6">There are no order for this product yet.</td>
-                          </tr>
-                      </ng-template>
-                  </p-table>
-              </div>
-          </td>
-      </tr>
-  </ng-template>
+<h2 class="table-header">Lista de dispositivos</h2>
+<p-table #dt [value]="dispositivos" dataKey="id" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '60rem', 'background-color': '#1b1e23' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 2rem"></th>
+            <th pSortableColumn="segmento">Segmento <p-sortIcon field="segmento" /></th>
+            <th pSortableColumn="cliente">Cliente <p-sortIcon field="cliente" /></th>
+            <th pSortableColumn="host">Host <p-sortIcon field="host" /></th>
+            <th pSortableColumn="ip">IP <p-sortIcon field="ip" /></th>
+            <th pSortableColumn="estado">Estado <p-sortIcon field="estado" /></th>
+            <th pSortableColumn="fechaCaida">Fecha Caída <p-sortIcon field="fechaCaida" /></th>
+            <th pSortableColumn="fechaResolucion">Fecha Resolución <p-sortIcon field="fechaResolucion" /></th>
+            <th pSortableColumn="noSerial">No. Serial <p-sortIcon field="noSerial" /></th>
+            <th pSortableColumn="macAddress">MAC Address <p-sortIcon field="macAddress" /></th>
+            <th pSortableColumn="marca">Marca <p-sortIcon field="marca" /></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'segmento', 'contains')" placeholder="Buscar Segmento"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'cliente', 'contains')" placeholder="Buscar Cliente"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'host', 'contains')" placeholder="Buscar Host"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'ip', 'contains')" placeholder="Buscar IP"></th>
+            <th></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'fechaCaida', 'contains')" placeholder="Buscar Fecha Caída"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'fechaResolucion', 'contains')" placeholder="Buscar Fecha Resolución"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'noSerial', 'contains')" placeholder="Buscar No. Serial"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'macAddress', 'contains')" placeholder="Buscar MAC Address"></th>
+            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'marca', 'contains')" placeholder="Buscar Marca"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dispositivo let-expanded="expanded">
+        <tr>
+            <td>
+                <p-button type="button" pRipple [pRowToggler]="dispositivo" [text]="true" [rounded]="true" [plain]="true" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" />
+            </td>
+            <td>{{ dispositivo.segmento }}</td>
+            <td>{{ dispositivo.cliente }}</td>
+            <td>{{ dispositivo.host }}</td>
+            <td>{{ dispositivo.ip }}</td>
+            <td>
+                <span [ngStyle]="{'background-color': dispositivo.disponible ? 'green' : 'red', 'display': 'inline-block', 'width': '10px', 'height': '10px', 'border-radius': '50%'}"></span>
+            </td>
+            <td>{{ dispositivo.fechaCaida }}</td>
+            <td>{{ dispositivo.fechaResolucion }}</td>
+            <td>{{ dispositivo.noSerial }}</td>
+            <td>{{ dispositivo.macAddress }}</td>
+            <td>{{ dispositivo.marca }}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+        <tr>
+            <td colspan="11">No se encontraron dispositivos.</td>
+        </tr>
+    </ng-template>
 </p-table>

@@ -2,414 +2,210 @@ import { Component } from '@angular/core';
 import { TableRowCollapseEvent, TableRowExpandEvent } from 'primeng/table';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'nivel-2';
-  expandedRows = {};
-  products = [
-    {
-        id: '1000',
-        code: 'f230fh0g3',
-        name: 'Bamboo Watch',
-        description: 'Product Description',
-        image: 'bamboo-watch.jpg',
-        price: 65,
-        category: 'Accessories',
-        quantity: 24,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'black-watch.jpg',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-    },
-    {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'blue-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-    },
-    {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'blue-t-shirt.jpg',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1004',
-        code: 'h456wer53',
-        name: 'Bracelet',
-        description: 'Product Description',
-        image: 'bracelet.jpg',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1005',
-        code: 'av2231fwg',
-        name: 'Brown Purse',
-        description: 'Product Description',
-        image: 'brown-purse.jpg',
-        price: 120,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-    },
-    {
-        id: '1006',
-        code: 'bib36pfvm',
-        name: 'Chakra Bracelet',
-        description: 'Product Description',
-        image: 'chakra-bracelet.jpg',
-        price: 32,
-        category: 'Accessories',
-        quantity: 5,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-    },
-    {
-        id: '1007',
-        code: 'mbvjkgip5',
-        name: 'Galaxy Earrings',
-        description: 'Product Description',
-        image: 'galaxy-earrings.jpg',
-        price: 34,
-        category: 'Accessories',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1008',
-        code: 'vbb124btr',
-        name: 'Game Controller',
-        description: 'Product Description',
-        image: 'game-controller.jpg',
-        price: 99,
-        category: 'Electronics',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 4
-    },
-    {
-        id: '1009',
-        code: 'cm230f032',
-        name: 'Gaming Set',
-        description: 'Product Description',
-        image: 'gaming-set.jpg',
-        price: 299,
-        category: 'Electronics',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-    },
-    {
-        id: '1010',
-        code: 'plb34234v',
-        name: 'Gold Phone Case',
-        description: 'Product Description',
-        image: 'gold-phone-case.jpg',
-        price: 24,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-    },
-    {
-        id: '1011',
-        code: '4920nnc2d',
-        name: 'Green Earbuds',
-        description: 'Product Description',
-        image: 'green-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1012',
-        code: '250vm23cc',
-        name: 'Green T-Shirt',
-        description: 'Product Description',
-        image: 'green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 74,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1013',
-        code: 'fldsmn31b',
-        name: 'Grey T-Shirt',
-        description: 'Product Description',
-        image: 'grey-t-shirt.jpg',
-        price: 48,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 3
-    },
-    {
-        id: '1014',
-        code: 'waas1x2as',
-        name: 'Headphones',
-        description: 'Product Description',
-        image: 'headphones.jpg',
-        price: 175,
-        category: 'Electronics',
-        quantity: 8,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5
-    },
-    {
-        id: '1015',
-        code: 'vb34btbg5',
-        name: 'Light Green T-Shirt',
-        description: 'Product Description',
-        image: 'light-green-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 34,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1016',
-        code: 'k8l6j58jl',
-        name: 'Lime Band',
-        description: 'Product Description',
-        image: 'lime-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 12,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-    },
-    {
-        id: '1017',
-        code: 'v435nn85n',
-        name: 'Mini Speakers',
-        description: 'Product Description',
-        image: 'mini-speakers.jpg',
-        price: 85,
-        category: 'Clothing',
-        quantity: 42,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1018',
-        code: '09zx9c0zc',
-        name: 'Painted Phone Case',
-        description: 'Product Description',
-        image: 'painted-phone-case.jpg',
-        price: 56,
-        category: 'Accessories',
-        quantity: 41,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1019',
-        code: 'mnb5mb2m5',
-        name: 'Pink Band',
-        description: 'Product Description',
-        image: 'pink-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 63,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1020',
-        code: 'r23fwf2w3',
-        name: 'Pink Purse',
-        description: 'Product Description',
-        image: 'pink-purse.jpg',
-        price: 110,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4
-    },
-    {
-        id: '1021',
-        code: 'pxpzczo23',
-        name: 'Purple Band',
-        description: 'Product Description',
-        image: 'purple-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 6,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-    },
-    {
-        id: '1022',
-        code: '2c42cb5cb',
-        name: 'Purple Gemstone Necklace',
-        description: 'Product Description',
-        image: 'purple-gemstone-necklace.jpg',
-        price: 45,
-        category: 'Accessories',
-        quantity: 62,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1023',
-        code: '5k43kkk23',
-        name: 'Purple T-Shirt',
-        description: 'Product Description',
-        image: 'purple-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 5
-    },
-    {
-        id: '1024',
-        code: 'lm2tny2k4',
-        name: 'Shoes',
-        description: 'Product Description',
-        image: 'shoes.jpg',
-        price: 64,
-        category: 'Clothing',
-        quantity: 0,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1025',
-        code: 'nbm5mv45n',
-        name: 'Sneakers',
-        description: 'Product Description',
-        image: 'sneakers.jpg',
-        price: 78,
-        category: 'Clothing',
-        quantity: 52,
-        inventoryStatus: 'INSTOCK',
-        rating: 4
-    },
-    {
-        id: '1026',
-        code: 'zx23zc42c',
-        name: 'Teal T-Shirt',
-        description: 'Product Description',
-        image: 'teal-t-shirt.jpg',
-        price: 49,
-        category: 'Clothing',
-        quantity: 3,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3
-    },
-    {
-        id: '1027',
-        code: 'acvx872gc',
-        name: 'Yellow Earbuds',
-        description: 'Product Description',
-        image: 'yellow-earbuds.jpg',
-        price: 89,
-        category: 'Electronics',
-        quantity: 35,
-        inventoryStatus: 'INSTOCK',
-        rating: 3
-    },
-    {
-        id: '1028',
-        code: 'tx125ck42',
-        name: 'Yoga Mat',
-        description: 'Product Description',
-        image: 'yoga-mat.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 15,
-        inventoryStatus: 'INSTOCK',
-        rating: 5
-    },
-    {
-        id: '1029',
-        code: 'gwuby345v',
-        name: 'Yoga Set',
-        description: 'Product Description',
-        image: 'yoga-set.jpg',
-        price: 20,
-        category: 'Fitness',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 8
+    title = 'nivel-2';
+    expandedRows = {};
+    products = [];
+
+    dispositivos = [
+        {
+            id: 1,
+            segmento: 'Segmento I',
+            cliente: 'Municipio de Ciudad Juarez',
+            host: 'SW-Plaza-X',
+            ip: '10.10.26.147',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-001',
+            macAddress: 'A8:F7:E0:67:67:CE',
+            marca: 'PlanetsGS-5220-8G',
+            disponible: true
+        },
+        {
+            id: 2,
+            segmento: 'Segmento II',
+            cliente: 'Empresa ABC',
+            host: 'SW-Plaza-Y',
+            ip: '10.10.27.148',
+            estado: 'No Disponible',
+            fechaCaida: '1 Sept 2024, 12:00',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-002',
+            macAddress: 'B9:F8:E1:68:68:DF',
+            marca: 'PlanetsGS-5220-8G',
+            disponible: false
+        },
+        {
+            id: 3,
+            segmento: 'Segmento III',
+            cliente: 'Hospital General',
+            host: 'SW-Plaza-Z',
+            ip: '10.10.28.149',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-003',
+            macAddress: 'C1:G2:H3:J4:K5:L6',
+            marca: 'Cisco-X-3500',
+            disponible: true
+        },
+        {
+            id: 4,
+            segmento: 'Segmento IV',
+            cliente: 'Universidad UASLP',
+            host: 'SW-Campus',
+            ip: '10.10.29.150',
+            estado: 'No Disponible',
+            fechaCaida: '31 August 2024, 08:30',
+            fechaResolucion: '31 August 2024, 16:00',
+            noSerial: 'System-004',
+            macAddress: 'D7:E8:F9:12:34:56',
+            marca: 'HP-Switch-3800',
+            disponible: false
+        },
+        {
+            id: 5,
+            segmento: 'Segmento V',
+            cliente: 'Compañía XYZ',
+            host: 'SW-Central',
+            ip: '10.10.30.151',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-005',
+            macAddress: 'E1:E2:E3:E4:E5:E6',
+            marca: 'D-Link-DGS-1210',
+            disponible: true
+        },
+        {
+            id: 6,
+            segmento: 'Segmento VI',
+            cliente: 'Banco Nacional',
+            host: 'SW-Norte',
+            ip: '10.10.31.152',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-006',
+            macAddress: 'F7:G8:H9:01:23:45',
+            marca: 'Netgear-GS110TP',
+            disponible: true
+        },
+        {
+            id: 7,
+            segmento: 'Segmento VII',
+            cliente: 'Telecomunicaciones XYZ',
+            host: 'SW-Sur',
+            ip: '10.10.32.153',
+            estado: 'No Disponible',
+            fechaCaida: '2 Sept 2024, 09:00',
+            fechaResolucion: '2 Sept 2024, 15:30',
+            noSerial: 'System-007',
+            macAddress: 'G1:H2:I3:J4:K5:L6',
+            marca: 'TP-Link-SG2008',
+            disponible: false
+        },
+        {
+            id: 8,
+            segmento: 'Segmento VIII',
+            cliente: 'Empresa de Energía',
+            host: 'SW-Oeste',
+            ip: '10.10.33.154',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-008',
+            macAddress: 'H7:I8:J9:12:34:56',
+            marca: 'MikroTik-CCR1036',
+            disponible: true
+        },
+        {
+            id: 9,
+            segmento: 'Segmento IX',
+            cliente: 'Agencia de Gobierno',
+            host: 'SW-Noreste',
+            ip: '10.10.34.155',
+            estado: 'No Disponible',
+            fechaCaida: '3 Sept 2024, 10:45',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-009',
+            macAddress: 'I1:J2:K3:L4:M5:N6',
+            marca: 'Huawei-S5700',
+            disponible: false
+        },
+        {
+            id: 10,
+            segmento: 'Segmento X',
+            cliente: 'Centro de Investigación ABC',
+            host: 'SW-Sureste',
+            ip: '10.10.35.156',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-010',
+            macAddress: 'J7:K8:L9:01:23:45',
+            marca: 'Juniper-EX3300',
+            disponible: true
+        },
+        {
+            id: 11,
+            segmento: 'Segmento XI',
+            cliente: 'Fábrica de Manufactura',
+            host: 'SW-Noroeste',
+            ip: '10.10.36.157',
+            estado: 'Disponible',
+            fechaCaida: 'N/A',
+            fechaResolucion: 'N/A',
+            noSerial: 'System-011',
+            macAddress: 'K1:L2:M3:N4:O5:P6',
+            marca: 'Aruba-2930F',
+            disponible: true
+        },
+    ];
+
+    constructor() { }
+
+    expandAll() {
+        // this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});
     }
-];
 
-constructor() {}
+    collapseAll() {
+        this.expandedRows = {};
+    }
 
-expandAll() {
-  // this.expandedRows = this.products.reduce((acc, p) => (acc[p.id] = true) && acc, {});
-}
+    getSeverity(status: string) {
+        switch (status) {
+            case 'INSTOCK':
+                return 'success';
+            case 'LOWSTOCK':
+                return 'warning';
+            case 'OUTOFSTOCK':
+                return 'danger';
+        }
+    }
 
-collapseAll() {
-  this.expandedRows = {};
-}
+    getStatusSeverity(status: string) {
+        switch (status) {
+            case 'PENDING':
+                return 'warning';
+            case 'DELIVERED':
+                return 'success';
+            case 'CANCELLED':
+                return 'danger';
+        }
+    }
 
-getSeverity(status: string) {
-  switch (status) {
-      case 'INSTOCK':
-          return 'success';
-      case 'LOWSTOCK':
-          return 'warning';
-      case 'OUTOFSTOCK':
-          return 'danger';
-  }
-}
+    onRowExpand(event: TableRowExpandEvent) {
+        // this.messageService.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
+    }
 
-getStatusSeverity(status: string) {
-  switch (status) {
-      case 'PENDING':
-          return 'warning';
-      case 'DELIVERED':
-          return 'success';
-      case 'CANCELLED':
-          return 'danger';
-  }
-}
-
-onRowExpand(event: TableRowExpandEvent) {
-  // this.messageService.add({ severity: 'info', summary: 'Product Expanded', detail: event.data.name, life: 3000 });
-}
-
-onRowCollapse(event: TableRowCollapseEvent) {
-  // this.messageService.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
-}
+    onRowCollapse(event: TableRowCollapseEvent) {
+        // this.messageService.add({ severity: 'success', summary: 'Product Collapsed', detail: event.data.name, life: 3000 });
+    }
 
 }

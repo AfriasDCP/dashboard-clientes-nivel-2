@@ -3,3 +3,54 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 @import "primeicons/primeicons.css";
+
+body {
+    background-color: #1b1e23; 
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.table-header {
+    background-color: #1b1e23;
+    color: #ffffff;
+    padding: 10px;
+    text-align: left;
+}
+
+.p-datatable-wrapper {
+    background-color: #1b1e23;
+}
+
+.p-datatable-thead > tr > th {
+    background-color: #2c2f34;
+    color: #ffffff;
+}
+
+.p-datatable-tbody > tr > td {
+    background-color: #1b1e23; 
+    color: #ffffff;
+}
+
+.p-paginator {
+    background-color: #1b1e23;
+    color: #ffffff; 
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page {
+    background-color: #2c2f34;
+    color: #ffffff;
+}
+
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color: #3a3d42;
+    color: #ffffff;
+}
+
+.small-input {
+    font-size: 12px; 
+    padding: 4px;   
+    width: 100%;  
+    box-sizing: border-box;
+}
+
