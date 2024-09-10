@@ -1,5 +1,5 @@
 <h2 class="table-header">Lista de dispositivos</h2>
-<p-table #dt [value]="dispositivos" dataKey="id" [paginator]="true" [rows]="10" [tableStyle]="{ 'min-width': '60rem', 'background-color': '#1b1e23' }" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
+<p-table #dt [value]="dispositivos" dataKey="id" [paginator]="true" [rows]="10" [expandedRowKeys]="expandedRows" (onRowExpand)="onRowExpand($event)" (onRowCollapse)="onRowCollapse($event)">
     <ng-template pTemplate="header">
         <tr>
             <th style="width: 2rem"></th>
@@ -14,20 +14,8 @@
             <th pSortableColumn="macAddress">MAC Address <p-sortIcon field="macAddress" /></th>
             <th pSortableColumn="marca">Marca <p-sortIcon field="marca" /></th>
         </tr>
-        <tr>
-            <th></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'segmento', 'contains')" placeholder="Buscar Segmento"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'cliente', 'contains')" placeholder="Buscar Cliente"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'host', 'contains')" placeholder="Buscar Host"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'ip', 'contains')" placeholder="Buscar IP"></th>
-            <th></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'fechaCaida', 'contains')" placeholder="Buscar Fecha Caída"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'fechaResolucion', 'contains')" placeholder="Buscar Fecha Resolución"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'noSerial', 'contains')" placeholder="Buscar No. Serial"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'macAddress', 'contains')" placeholder="Buscar MAC Address"></th>
-            <th><input pInputText class="small-input" type="text" (input)="dt.filter($event.target.value, 'marca', 'contains')" placeholder="Buscar Marca"></th>
-        </tr>
     </ng-template>
+
     <ng-template pTemplate="body" let-dispositivo let-expanded="expanded">
         <tr>
             <td>
@@ -38,15 +26,48 @@
             <td>{{ dispositivo.host }}</td>
             <td>{{ dispositivo.ip }}</td>
             <td>
-                <span [ngStyle]="{'background-color': dispositivo.disponible ? 'green' : 'red', 'display': 'inline-block', 'width': '10px', 'height': '10px', 'border-radius': '50%'}"></span>
+                <span [ngStyle]="{'background-color': dispositivo.estado ? 'green' : 'red', 'display': 'inline-block', 'width': '10px', 'height': '10px', 'border-radius': '50%'}"></span>
             </td>
             <td>{{ dispositivo.fechaCaida }}</td>
             <td>{{ dispositivo.fechaResolucion }}</td>
             <td>{{ dispositivo.noSerial }}</td>
             <td>{{ dispositivo.macAddress }}</td>
-            <td>{{ dispositivo.marca }}</td>
+            <td>
+                {{ dispositivo.marca.length > 20 ? (dispositivo.marca | slice:0:20) + '...' : dispositivo.marca }}
+            </td>              
         </tr>
     </ng-template>
+
+    <ng-template pTemplate="rowexpansion" let-dispositivo>
+        <tr>
+            <td colspan="11">
+                <div style="padding: 1rem">
+                    <h5>Problemas de Interfaces</h5>
+                    <table class="table-zebra" *ngIf="problemasInterfaces[dispositivo.id]">
+                        <thead>
+                            <tr>
+                                <th>Interface</th>
+                                <th>Estado</th>
+                                <th>Problema</th>
+                                <th>Fecha Problema</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let problema of problemasInterfaces[dispositivo.id]">
+                                <td>{{ problema.interfaceDescription }}</td>
+                                <td>
+                                    <span [ngStyle]="{'background-color': problema.estado === '1' ? 'green' : 'red', 'display': 'inline-block', 'width': '10px', 'height': '10px', 'border-radius': '50%'}"></span>
+                                </td>
+                                <td>{{ problema.problema }}</td>
+                                <td>{{ problema.fechaProblema }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+        </tr>
+    </ng-template>      
+
     <ng-template pTemplate="emptymessage">
         <tr>
             <td colspan="11">No se encontraron dispositivos.</td>
